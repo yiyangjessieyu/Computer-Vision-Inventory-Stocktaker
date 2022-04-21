@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
+INPUT_IMAGE_PATH = 'resources/input_image.jpg'
 
 def nothing(x):
     # We need a callback for the createTrackbar function.
@@ -54,7 +55,7 @@ def houghP():
 
 
 def houghNormal():
-    img_original = cv2.imread('images/small_checkerboard.png')
+    img_original = cv2.imread(LOCAL_PATH + INPUT_IMAGE_PATH)
     # Scale the image down to 70% to fit on the monitor better.
     img_original = cv2.resize(img_original, (int(img_original.shape[1]*0.7), int(img_original.shape[0]*0.7)))
     gray = cv2.cvtColor(img_original, cv2.COLOR_BGR2GRAY)
@@ -102,5 +103,5 @@ def houghNormal():
 
 
 if __name__ == "__main__":
-    houghP()
-    #houghNormal()
+    #houghP()
+    houghNormal()
