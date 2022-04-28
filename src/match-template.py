@@ -1,6 +1,7 @@
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/input_image2.jpg'
-TEMPLATE_IMAGE_PATH = 'resources/template_image2.png'
+INPUT_IMAGE_PATH = 'resources/side_phone.jpg'
+TEMPLATE_IMAGE_PATH = 'resources/template_phone.png'
+OUTPUT_IMAGE_PATH = './resources/output.png'
 
 import cv2 as cv
 import numpy as np
@@ -9,7 +10,7 @@ from matplotlib import pyplot as plt
 # Importing input images
 input_image = cv.imread(LOCAL_PATH + INPUT_IMAGE_PATH)
 input_image_gray = cv.cvtColor(input_image, cv.COLOR_BGR2GRAY)
-input_image_copy = input_image.copy()
+input_image_copy = input_image_gray.copy()
 
 # Importing template images
 template_image = cv.imread(LOCAL_PATH + TEMPLATE_IMAGE_PATH,0)
@@ -31,13 +32,12 @@ for method in methods:
     loc = np.where(result >= threshold)
     for pt in zip(*loc[::-1]):
       cv.rectangle(input_image, pt, (pt[0] + template_width, pt[1] + template_height), (0, 0, 255), 2)
-    cv.imwrite('result.png', input_image)
+    cv.imwrite(LOCAL_PATH + OUTPUT_IMAGE_PATH, input_image)
 
     # cv.minMaxLoc function for when there's one template image instance in the input image to search for
-    # If the above is true, then below code must be commented out
-    # [ONE TEMPLATE IMAGE INSTANCE CODE STARTING HERE]
-    #
-    # # Apply template Matching
+    #[ONE TEMPLATE IMAGE INSTANCE CODE STARTING HERE]
+
+    #Apply template Matching
     # result = cv.matchTemplate(img, template_image, current_method)
     #
     # min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
