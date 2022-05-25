@@ -4,12 +4,18 @@ import cv2
 import numpy as np
 
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/side_phone.jpg'
+INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
 
 def nothing(x):
     # We need a callback for the createTrackbar function.
     # It doesn't need to do anything, however.
     pass
+
+def convertToGrayBlur(image):
+    RGB = cv2.cvtColor(image, cv2.COLOR_HSV2RGB)
+    gray = cv2.cvtColor(RGB, cv2.COLOR_RGB2GRAY)
+    grayBlur = cv2.GaussianBlur(gray, (19, 19), 0)
+    return grayBlur
 
 def houghP():
     img_original = cv2.imread(LOCAL_PATH + INPUT_IMAGE_PATH)
@@ -18,6 +24,11 @@ def houghP():
 
     blur = cv2.GaussianBlur(img_original, (9,9), 0)
     gray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
+
+    #gray = convertToGrayBlur(img_original);
+
+    #gray = cv2.morphologyEx(gray, cv2.MORPH_OPEN, np.ones((3,3),np.uint8))
+    #gray = cv2.morphologyEx(gray, cv2.MORPH_DILATE, np.ones((7,7),np.uint8))
 
     cv2.namedWindow('Hough Line Transform')
     cv2.createTrackbar('Canny Threshold 1', 'Hough Line Transform', 0, 1200, nothing)
@@ -60,10 +71,15 @@ def houghNormal():
     img_original = cv2.resize(img_original, (int(img_original.shape[1]*0.7), int(img_original.shape[0]*0.7)))
     gray = cv2.cvtColor(img_original, cv2.COLOR_BGR2GRAY)
 
+    #gray = convertToGrayBlur(img_original);
+
+    #gray = cv2.morphologyEx(gray, cv2.MORPH_OPEN, np.ones((3,3),np.uint8))
+    #gray = cv2.morphologyEx(gray, cv2.MORPH_DILATE, np.ones((7,7),np.uint8))
+
     cv2.namedWindow('Hough Line Transform')
     cv2.createTrackbar('CannyThreshold1', 'Hough Line Transform', 0, 1200, nothing)
     cv2.createTrackbar('CannyThreshold2', 'Hough Line Transform', 0, 1200, nothing)
-    cv2.createTrackbar("HoughThreshold", 'Hough Line Transform', 0, 200, nothing)
+    cv2.createTrackbar("HoughThreshold", 'Hough Line Transform', 0, 1200, nothing)
 
     while True:
         houghThreshold = cv2.getTrackbarPos('HoughThreshold', 'Hough Line Transform')
@@ -103,5 +119,5 @@ def houghNormal():
 
 
 if __name__ == "__main__":
-    #houghP()
-    houghNormal()
+    houghP()
+    #houghNormal()

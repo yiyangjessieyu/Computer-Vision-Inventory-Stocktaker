@@ -1,6 +1,6 @@
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/side_phone.jpg'
-TEMPLATE_IMAGE_PATH = 'resources/template_phone.png'
+INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
+TEMPLATE_IMAGE_PATH = 'resources/template_heart.png'
 OUTPUT_IMAGE_PATH = './resources/output.png'
 
 import cv2 as cv
@@ -38,23 +38,23 @@ for method in methods:
     #[ONE TEMPLATE IMAGE INSTANCE CODE STARTING HERE]
 
     #Apply template Matching
-    # result = cv.matchTemplate(img, template_image, current_method)
-    #
-    # min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    #
+    result = cv.matchTemplate(img, template_image, current_method)
+
+    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+
     # # If the current_method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum
-    # if current_method in [cv.TM_SQDIFF, cv.TM_SQDIFF_NORMED]:
-    #     top_left = min_loc
-    # else:
-    #     top_left = max_loc
-    #
-    # bottom_right = (top_left[0] + template_width, top_left[1] + template_height)
-    # cv.rectangle(img,top_left, bottom_right, 255, 2)
-    # plt.subplot(121),plt.imshow(result,cmap = 'gray')
-    # plt.title('Matching Result'), plt.xticks([]), plt.yticks([])
-    # plt.subplot(122),plt.imshow(img,cmap = 'gray')
-    # plt.title('Detected Point'), plt.xticks([]), plt.yticks([])
-    # plt.suptitle(method)
-    # plt.show()
+    if current_method in [cv.TM_SQDIFF, cv.TM_SQDIFF_NORMED]:
+        top_left = min_loc
+    else:
+        top_left = max_loc
+
+    bottom_right = (top_left[0] + template_width, top_left[1] + template_height)
+    cv.rectangle(img,top_left, bottom_right, 255, 2)
+    plt.subplot(121),plt.imshow(result,cmap = 'gray')
+    plt.title('Matching Result'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122),plt.imshow(img,cmap = 'gray')
+    plt.title('Detected Point'), plt.xticks([]), plt.yticks([])
+    plt.suptitle(method)
+    plt.show()
     # [ONE TEMPLATE IMAGE INSTANCE CODE ENDING HERE]
 
