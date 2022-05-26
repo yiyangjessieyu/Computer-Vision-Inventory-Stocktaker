@@ -10,6 +10,11 @@ import cv2 as cv
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
 INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
 
+def nothing(x):
+    # We need a callback for the createTrackbar function.
+    # It doesn't need to do anything, however.
+    pass
+
 def show_wait_destroy(winname, img):
     cv.imshow(winname, img)
     #cv.resizeWindow(winname, 50, 100)
@@ -81,70 +86,6 @@ def extract_vertical(bitwise):
 
     return vertical
 
-def main(argv):
-
-    # [load_image]
-    src = read_image(argv)
-    cv.imshow("src", src)
-
-    # [hough lines]
-    src = extract_hough_normal(src)
-
-    # [gray]
-    gray = transform_grey(src)
-    show_wait_destroy("gray", gray)
-
-
-    # show_wait_overlay(src, cv.imread(gray))
-
-
-    # [bitwise]
-    bitwise = transform_bitwise(gray)
-    show_wait_destroy("bitwise", bitwise)
-
-    # [vertical]
-    vertical = extract_vertical(bitwise)
-    show_wait_destroy("vertical", vertical)
-
-    # [inverse bitwise]
-    vertical_inverse = cv.bitwise_not(vertical)
-    show_wait_destroy("vertical_inverse", vertical_inverse)
-
-    # [smooth]
-    '''
-    Extract edges and smooth image according to the logic
-    1. extract edges
-    2. dilate(edges)
-    3. src.copyTo(smooth)
-    4. blur smooth img
-    5. smooth.copyTo(src, edges)
-    '''
-    # Step 1
-    edges = cv.adaptiveThreshold(vertical, 255, cv.ADAPTIVE_THRESH_MEAN_C, \
-                                cv.THRESH_BINARY, 3, -2)
-    show_wait_destroy("edges", edges)
-
-    # Step 2
-    kernel = np.ones((2, 2), np.uint8)
-    edges = cv.dilate(edges, kernel)
-    show_wait_destroy("dilate", edges)
-
-    # Step 3
-    smooth = np.copy(vertical)
-
-    # Step 4
-    smooth = cv.blur(smooth, (2, 2))
-
-    # Step 5
-    (rows, cols) = np.where(edges != 0)
-    vertical[rows, cols] = smooth[rows, cols]
-
-    # Show final result
-    show_wait_destroy("smooth - final", vertical)
-    # [smooth]
-    return 0
-
-
 def extract_hough_normal(src):
     gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
 
@@ -210,11 +151,71 @@ def extract_hough_normal(src):
         cv.imshow('Hough Line Transform', combined)
         cv.imshow('Dark', dark)
 
-        if cv.waitKey(1000) & 0xFF == ord('q'):
-            cv.destroyAllWindows()
-            break
-
         return dark
+
+def main(argv):
+
+    # [load_image]
+    src = read_image(argv)
+    cv.imshow("src", src)
+
+    # [hough lines]
+    dark = extract_hough_normal(src)
+
+    # Apply morphology operations
+    morph = cv.erode(dark, dark)
+    morph = cv.dilate(dark, dark, iterations=5)
+    cv.imshow("morph", morph)
+
+    # [gray]
+    #gray = transform_grey(dark)
+    #show_wait_destroy("gray", gray)
+
+    # [bitwise]
+    #bitwise = transform_bitwise(dark)
+    #show_wait_destroy("bitwise", bitwise)
+
+    # [vertical]
+    #vertical = extract_vertical(bitwise)
+    #show_wait_destroy("vertical", vertical)
+
+    # [inverse bitwise]
+    #vertical_inverse = cv.bitwise_not(vertical)
+    #show_wait_destroy("vertical_inverse", vertical_inverse)
+
+    # [smooth]
+    '''
+    Extract edges and smooth image according to the logic
+    1. extract edges
+    2. dilate(edges)
+    3. src.copyTo(smooth)
+    4. blur smooth img
+    5. smooth.copyTo(src, edges)
+    '''
+    # Step 1
+    edges = cv.adaptiveThreshold(dark, 255, cv.ADAPTIVE_THRESH_MEAN_C, \
+                                cv.THRESH_BINARY, 3, -2)
+    show_wait_destroy("edges", edges)
+
+    # Step 2
+    kernel = np.ones((2, 2), np.uint8)
+    edges = cv.dilate(edges, kernel)
+    show_wait_destroy("dilate", edges)
+
+    # Step 3
+    smooth = np.copy(vertical)
+
+    # Step 4
+    smooth = cv.blur(smooth, (2, 2))
+
+    # Step 5
+    (rows, cols) = np.where(edges != 0)
+    vertical[rows, cols] = smooth[rows, cols]
+
+    # Show final result
+    show_wait_destroy("smooth - final", vertical)
+    # [smooth]
+    return 0
 
 if __name__ == "__main__":
     main(sys.argv[1:])

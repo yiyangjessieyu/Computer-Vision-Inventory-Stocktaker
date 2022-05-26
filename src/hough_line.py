@@ -5,6 +5,7 @@ import numpy as np
 
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
 INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
+OUTPUT_IMAGE_PATH = './resources/dark.png'
 
 def nothing(x):
     # We need a callback for the createTrackbar function.
@@ -78,8 +79,8 @@ def houghNormal():
 
     cv2.namedWindow('Hough Line Transform')
     cv2.createTrackbar('CannyThreshold1', 'Hough Line Transform', 0, 1200, nothing)
-    cv2.createTrackbar('CannyThreshold2', 'Hough Line Transform', 100, 1200, nothing)
-    cv2.createTrackbar("HoughThreshold", 'Hough Line Transform', 270, 1200, nothing)
+    cv2.createTrackbar('CannyThreshold2', 'Hough Line Transform', 200, 1200, nothing)
+    cv2.createTrackbar("HoughThreshold", 'Hough Line Transform', 240, 1200, nothing)
 
     while True:
         houghThreshold = cv2.getTrackbarPos('HoughThreshold', 'Hough Line Transform')
@@ -132,6 +133,10 @@ def houghNormal():
 
         cv2.imshow('Hough Line Transform', combined)
         cv2.imshow('Dark', dark)
+        cv2.imwrite(LOCAL_PATH + OUTPUT_IMAGE_PATH, dark)
+
+        # erode
+        # then count lines again using hugh with length of the lines list
 
         if cv2.waitKey(1000) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
