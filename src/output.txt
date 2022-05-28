@@ -1,6 +1,6 @@
-dark 45
-gray 45
-bitwise 34
-dilate 41
-bitwise_inverse 34
-smooth 44
+dark 29
+gray 28
+bitwise 10
+dilate 12
+bitwise_inverse 10
+smooth 22

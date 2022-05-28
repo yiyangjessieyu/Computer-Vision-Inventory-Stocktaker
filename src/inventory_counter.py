@@ -7,7 +7,7 @@ import numpy as np
 
 # Global input file paths to set.
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
+INPUT_IMAGE_PATH = 'resources/side_invisible.jpg'
 
 # Global output file paths to set.
 OUTPUT_IMAGE_PATH = './resources/dark.png'
@@ -20,9 +20,11 @@ HOUGH_THRESHOLD = 240
 
 def display_hough_window():
     cv.namedWindow('Hough Line Transform')
-    cv.createTrackbar('CannyThreshold1', 'Hough Line Transform', 0, 1200, nothing)
-    cv.createTrackbar('CannyThreshold2', 'Hough Line Transform', CANNY_THRESHOLD2, 1200, nothing)
-    cv.createTrackbar("HoughThreshold", 'Hough Line Transform', HOUGH_THRESHOLD, 1200, nothing)
+    cv.createTrackbar('CannyThreshold 1', 'Hough Line Transform', 0, 1200, nothing)
+    cv.createTrackbar('CannyThreshold 2', 'Hough Line Transform', CANNY_THRESHOLD2, 1200, nothing)
+    cv.createTrackbar("Min Line Length", 'Hough Line Transform', HOUGH_THRESHOLD, 1200, nothing)
+    cv.createTrackbar("Max Line Gap", 'Hough Line Transform', 0, 100, nothing)
+
 
 
 def show_wait_destroy(window_name, img):
@@ -41,7 +43,9 @@ def nothing(x):
 def get_tracker_values():
     canny_threshold1 = cv.getTrackbarPos('CannyThreshold1', 'Hough Line Transform')
     canny_threshold2 = cv.getTrackbarPos('CannyThreshold2', 'Hough Line Transform')
-    hough_threshold = cv.getTrackbarPos('HoughThreshold', 'Hough Line Transform')
+    # TODO: finish this off, with ref to original hough-line
+    min_line_length = cv.getTrackbarPos('Min Line Length', 'Hough Line Transform')
+    max_line_gap = cv.getTrackbarPos('Max Line Gap', 'Hough Line Transform')
     return canny_threshold1, canny_threshold2, hough_threshold
 
 
@@ -75,6 +79,7 @@ def draw_hough_lines(lines):
 
 
 def extract_hough_normal(src):
+    gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
     gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
     display_hough_window()
 
@@ -179,7 +184,7 @@ def read_image(image_to_read):
         return -1
 
     # Scale the image down to 70% to fit on the monitor better.
-    src = cv.resize(src, (int(src.shape[1] * 0.7), int(src.shape[0] * 0.7)))
+    src = cv.resize(src, (int(src.shape[1] * 0.3), int(src.shape[0] * 0.3)))
 
     return src
 
