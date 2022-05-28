@@ -104,6 +104,9 @@ def extract_hough_normal():
             cv.destroyAllWindows()
             break
 
+        dark = read_image(LOCAL_PATH + OUTPUT_IMAGE_PATH)
+        return dark
+
 
 def transform_grey(src):
     # Transform source image to gray if it is not already
