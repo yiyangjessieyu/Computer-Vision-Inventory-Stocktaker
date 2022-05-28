@@ -163,13 +163,13 @@ def main(argv):
     dark = extract_hough_normal(src)
 
     # Apply morphology operations
-    morph = cv.erode(dark, dark)
-    morph = cv.dilate(dark, dark, iterations=5)
-    cv.imshow("morph", morph)
+    #morph = cv.erode(dark, dark)
+   # morph = cv.dilate(dark, dark, iterations=5)
+    #cv.imshow("morph", morph)
 
     # [gray]
-    #gray = transform_grey(dark)
-    #show_wait_destroy("gray", gray)
+    gray = transform_grey(dark)
+    show_wait_destroy("gray", gray)
 
     # [bitwise]
     #bitwise = transform_bitwise(dark)
