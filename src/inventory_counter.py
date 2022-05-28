@@ -5,10 +5,13 @@
 import cv2 as cv
 import numpy as np
 
-# Global image files paths to set
+# Global input file paths to set.
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
 INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
+
+# Global output file paths to set.
 OUTPUT_IMAGE_PATH = './resources/dark.png'
+OUTPUT_FILE_PATH = 'src/output.txt'
 
 # Global hough normal settings to set.
 CANNY_THRESHOLD2 = 200
@@ -53,8 +56,8 @@ def draw_hough_lines(lines):
     if lines is not None:
         for line in lines:
             for rho, theta in line:
-                if (theta >= np.radians(0) and theta <= np.radians(10)) or \
-                    (theta >= np.radians(350) and theta <= np.radians(360)) or \
+                if (np.radians(0) <= theta <= np.radians(10)) or \
+                    (np.radians(350) <= theta <= np.radians(360)) or \
                     (theta >= np.radians(170) and theta <= np.radians(190)):
                     a = np.cos(theta)
                     b = np.sin(theta)
@@ -71,8 +74,8 @@ def draw_hough_lines(lines):
     return img, dark
 
 
-def extract_hough_normal():
-    gray = cv.cvtColor(SOURCE_IMAGE, cv.COLOR_BGR2GRAY)
+def extract_hough_normal(src):
+    gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
     display_hough_window()
 
     while True:
@@ -108,6 +111,13 @@ def extract_hough_normal():
         return dark
 
 
+def count_hough_normal(src):
+    edges = cv.Canny(src, 0, CANNY_THRESHOLD2)
+    lines = cv.HoughLines(edges, 1, np.pi / 180, HOUGH_THRESHOLD)
+
+    return len(lines)
+
+
 def transform_grey(src):
     # Transform source image to gray if it is not already
     if len(src.shape) != 2:
@@ -118,25 +128,39 @@ def transform_grey(src):
 
 def transform_bitwise(src):
     # Apply adaptiveThreshold at the bitwise_not of gray, notice the ~ symbol
-    src = cv.bitwise_not(src)
     bitwise = cv.adaptiveThreshold(src, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 15, -2)
     return bitwise
 
 
-def extract_vertical(bitwise):
-    # Create the images that will use to extract the vertical lines
-    vertical = np.copy(bitwise)
-    # Specify size on vertical axis
-    rows = vertical.shape[0]
-    vertical_size = rows // 30
-    # Create structure element for extracting vertical lines through morphology operations
-    verticalStructure = cv.getStructuringElement(cv.MORPH_RECT, (1, vertical_size))
-    # show_wait_destroy("verticalStructure", verticalStructure)
-    # Apply morphology operations
-    vertical = cv.erode(vertical, verticalStructure)
-    vertical = cv.dilate(vertical, verticalStructure, iterations=5)
+def smooth_image(src):
+    '''
+        Extract edges and smooth image according to the logic
+        1. extract edges
+        2. dilate(edges)
+        3. src.copyTo(smooth)
+        4. blur smooth img
+        5. smooth.copyTo(src, edges)
+        '''
+    # Step 1
+    edges = cv.adaptiveThreshold(src, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 3, -2)
+    show_wait_destroy("edges", edges)
 
-    return vertical
+    # Step 2
+    kernel = np.ones((2, 2), np.uint8)
+    edges = cv.dilate(edges, kernel)
+    show_wait_destroy("dilate", edges)
+
+    # Step 3
+    smooth = np.copy(src)
+
+    # Step 4
+    smooth = cv.blur(smooth, (2, 2))
+
+    # Step 5
+    (rows, cols) = np.where(edges != 0)
+    src[rows, cols] = smooth[rows, cols]
+
+    return src
 
 
 def read_image(image_to_read):
@@ -160,24 +184,59 @@ def read_image(image_to_read):
     return src
 
 
+def output_results(results):
+    # Opening a file
+    output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'w')
+
+    # Writing a string to file
+    for key, value in results.items():
+        output.write(str(key) + ' ' + str(value) + '\n')
+
+    # Closing file
+    output.close()
+
+    # Checking if the data is written to file or not
+    output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'r')
+    print(output.read())
+    output.close()
+
 def main():
+    results = {}
+
     # [load_image]
     global SOURCE_IMAGE
     SOURCE_IMAGE = read_image(LOCAL_PATH + INPUT_IMAGE_PATH)
-    cv.imshow("Source Image", SOURCE_IMAGE)
 
     # [hough lines]
-    dark = extract_hough_normal()
+    dark = extract_hough_normal(SOURCE_IMAGE)
+    results["dark"] = count_hough_normal(dark)
 
-    # [gray] TODO work on making this work as it cannot use this param type
-    # TODO: if len(src.shape) != 2: AttributeError: 'NoneType' object has no attribute 'shape'
-    # TODO: however using SOURCE_IMAGE as the input param works. so may be a type issue
+    # [gray]
     gray = transform_grey(dark)
     show_wait_destroy("gray", gray)
+    results["gray"] = count_hough_normal(gray)
 
     # [bitwise]
     bitwise = transform_bitwise(gray)
     show_wait_destroy("bitwise", bitwise)
+    results["bitwise"] = count_hough_normal(bitwise)
+
+    kernel = np.ones((2, 2), np.uint8)
+    dilate = cv.dilate(bitwise, kernel)
+    show_wait_destroy("dilate", dilate)
+    results["dilate"] = count_hough_normal(dilate)
+
+    # [inverse bitwise]
+    bitwise_inverse = cv.bitwise_not(bitwise)
+    show_wait_destroy("bitwise_inverse", bitwise_inverse)
+    results["bitwise_inverse"] = count_hough_normal(bitwise_inverse)
+
+    # [smooth]
+    smooth = smooth_image(bitwise_inverse)
+    show_wait_destroy("smooth", smooth)
+    results["smooth"] = count_hough_normal(smooth)
+
+    output_results(results)
 
 
 if __name__ == "__main__":
