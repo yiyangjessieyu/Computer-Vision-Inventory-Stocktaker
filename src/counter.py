@@ -1,25 +1,16 @@
-# hough_line.py
-
+# Imports needed for this program to run.
 import cv2
 import numpy as np
 
-# Global threshold settings
-CANNY_THRESHOLD_1 = 1200
-CANNY_THRESHOLD_2 = 0
-HOUGH_THRESHOLD_1 = 120
 
+def extract_contours(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    thresh = cv2.threshold(gray, 120, 255, cv2.THRESH_BINARY_INV)[1]
 
-def nothing(x):
-    # We need a callback for the createTrackbar function.
-    # It doesn't need to do anything, however.
-    pass
+    cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
 
+    for c in cnts:
+        cv2.drawContours(image, [c], -1, (36, 255, 12), 3)
 
-def count_hough_lines(img_original):
-    gray = img_original
-    # Use the Canny Edge Detector to find some edges.
-    edges = cv2.Canny(gray, CANNY_THRESHOLD_1, CANNY_THRESHOLD_2)
-    # Attempt to detect straight lines in the edge detected image.
-    lines = cv2.HoughLines(edges, 1, np.pi / 180, HOUGH_THRESHOLD_1)
-
-    return len(lines)
+    return thresh, image

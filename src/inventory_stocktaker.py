@@ -21,28 +21,16 @@ def main():
     # [load_image]
     global SOURCE_IMAGE
     SOURCE_IMAGE = read_image(LOCAL_PATH + INPUT_IMAGE_PATH)
+    show_wait_destroy("SOURCE_IMAGE", SOURCE_IMAGE)
 
-    # [contours] TODO: refine this
-    thresh, contour, contour_dark = extract_contours(SOURCE_IMAGE)
-    show_wait_destroy("contour", contour)
-    show_wait_destroy("contour_dark", contour_dark)
+    # [contours]
+    contour = extract_contours(SOURCE_IMAGE)
+    show_wait_destroy("contour", contour[1])
+    show_wait_destroy("contour_dark", contour[2])
 
     # [hough lines]
-    contour_dark = read_image(LOCAL_PATH + "contour_dark")
-    show_wait_destroy("contour_dark222", contour_dark)
     dark = houghNormal(contour)
     show_wait_destroy("dark", dark)
-    # Save the dark drawing of lines onto desktop.
-    cv.imwrite(LOCAL_PATH, dark)
-
-    # [erode]
-    contour_dark = read_image(LOCAL_PATH + str(dark))
-    erode = houghNormal(dark)
-    show_wait_destroy("erode", erode)
-    # Save the dark drawing of lines onto desktop.
-    cv.imwrite(LOCAL_PATH, erode)
-
-    print(erode)
 
 
 
