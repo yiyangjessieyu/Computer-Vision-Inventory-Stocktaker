@@ -9,6 +9,9 @@ INPUT_IMAGE_PATH = 'resources/side_hearts2.jpg'
 OUTPUT_IMAGE_PATH = './resources/dark.png'
 OUTPUT_FILE_PATH = 'src/output.txt'
 
+# Global window size to set
+WINDOW_RATIO = 0.4
+
 
 def read_image(image_to_read):
     # Check number of arguments
@@ -26,7 +29,7 @@ def read_image(image_to_read):
         return -1
 
     # Scale the image down to 70% to fit on the monitor better.
-    src = cv.resize(src, (int(src.shape[1] * 0.3), int(src.shape[0] * 0.3)))
+    src = cv.resize(src, (int(src.shape[1] * WINDOW_RATIO), int(src.shape[0] * WINDOW_RATIO)))
 
     return src
 
