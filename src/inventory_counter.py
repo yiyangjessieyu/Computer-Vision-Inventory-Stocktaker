@@ -4,49 +4,8 @@
 # Imports needed for this program to run.
 import cv2 as cv
 import numpy as np
-
-# Global input file paths to set.
-LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/side_invisible.jpg'
-
-# Global output file paths to set.
-OUTPUT_IMAGE_PATH = './resources/dark.png'
-OUTPUT_FILE_PATH = 'src/output.txt'
-
-# Global hough normal settings to set.
-CANNY_THRESHOLD2 = 200
-HOUGH_THRESHOLD = 240
-
-
-def display_hough_window():
-    cv.namedWindow('Hough Line Transform')
-    cv.createTrackbar('CannyThreshold 1', 'Hough Line Transform', 0, 1200, nothing)
-    cv.createTrackbar('CannyThreshold 2', 'Hough Line Transform', CANNY_THRESHOLD2, 1200, nothing)
-    cv.createTrackbar("Min Line Length", 'Hough Line Transform', HOUGH_THRESHOLD, 1200, nothing)
-    cv.createTrackbar("Max Line Gap", 'Hough Line Transform', 0, 100, nothing)
-
-
-
-def show_wait_destroy(window_name, img):
-    cv.imshow(window_name, img)
-    cv.moveWindow(window_name, 500, 0)
-    cv.waitKey(0)
-    cv.destroyWindow(window_name)
-
-
-def nothing(x):
-    # We need a callback for the createTrackbar function.
-    # It doesn't need to do anything, however.
-    pass
-
-
-def get_tracker_values():
-    canny_threshold1 = cv.getTrackbarPos('CannyThreshold1', 'Hough Line Transform')
-    canny_threshold2 = cv.getTrackbarPos('CannyThreshold2', 'Hough Line Transform')
-    # TODO: finish this off, with ref to original hough-line
-    min_line_length = cv.getTrackbarPos('Min Line Length', 'Hough Line Transform')
-    max_line_gap = cv.getTrackbarPos('Max Line Gap', 'Hough Line Transform')
-    return canny_threshold1, canny_threshold2, hough_threshold
+from window import *
+from file import *
 
 
 def draw_hough_lines(lines):
@@ -80,7 +39,6 @@ def draw_hough_lines(lines):
 
 def extract_hough_normal(src):
     gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
-    gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
     display_hough_window()
 
     while True:
@@ -113,12 +71,13 @@ def extract_hough_normal(src):
             break
 
         dark = read_image(LOCAL_PATH + OUTPUT_IMAGE_PATH)
-        return dark
+    return dark
 
 
 def count_hough_normal(src):
+    dst = cv.Canny(src, 50, 200, None, 3)
     edges = cv.Canny(src, 0, CANNY_THRESHOLD2)
-    lines = cv.HoughLines(edges, 1, np.pi / 180, HOUGH_THRESHOLD)
+    lines = cv.HoughLines(dst, 1, np.pi / 180, HOUGH_THRESHOLD)
 
     return len(lines)
 
@@ -168,43 +127,6 @@ def smooth_image(src):
     return src
 
 
-def read_image(image_to_read):
-    # Check number of arguments
-    if len(image_to_read) < 1:
-        print ('Not enough parameters')
-        print ('Usage:\nmorph_lines_detection.py < path_to_image >')
-        return -1
-
-    # Load the image
-    src = cv.imread(image_to_read, cv.IMREAD_COLOR)
-
-    # Check if image is loaded fine
-    if src is None:
-        print ('Error opening image: ' + image_to_read)
-        return -1
-
-    # Scale the image down to 70% to fit on the monitor better.
-    src = cv.resize(src, (int(src.shape[1] * 0.3), int(src.shape[0] * 0.3)))
-
-    return src
-
-
-def output_results(results):
-    # Opening a file
-    output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'w')
-
-    # Writing a string to file
-    for key, value in results.items():
-        output.write(str(key) + ' ' + str(value) + '\n')
-
-    # Closing file
-    output.close()
-
-    # Checking if the data is written to file or not
-    output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'r')
-    print(output.read())
-    output.close()
-
 def main():
     results = {}
 
@@ -214,31 +136,32 @@ def main():
 
     # [hough lines]
     dark = extract_hough_normal(SOURCE_IMAGE)
-    results["dark"] = count_hough_normal(dark)
 
     # [gray]
     gray = transform_grey(dark)
     show_wait_destroy("gray", gray)
-    results["gray"] = count_hough_normal(gray)
 
     # [bitwise]
     bitwise = transform_bitwise(gray)
     show_wait_destroy("bitwise", bitwise)
-    results["bitwise"] = count_hough_normal(bitwise)
 
     kernel = np.ones((2, 2), np.uint8)
     dilate = cv.dilate(bitwise, kernel)
     show_wait_destroy("dilate", dilate)
-    results["dilate"] = count_hough_normal(dilate)
 
     # [inverse bitwise]
     bitwise_inverse = cv.bitwise_not(bitwise)
     show_wait_destroy("bitwise_inverse", bitwise_inverse)
-    results["bitwise_inverse"] = count_hough_normal(bitwise_inverse)
 
     # [smooth]
     smooth = smooth_image(bitwise_inverse)
     show_wait_destroy("smooth", smooth)
+
+    results["dark"] = count_hough_normal(dark)
+    results["gray"] = count_hough_normal(gray)
+    results["bitwise"] = count_hough_normal(bitwise)
+    results["dilate"] = count_hough_normal(dilate)
+    results["bitwise_inverse"] = count_hough_normal(bitwise_inverse)
     results["smooth"] = count_hough_normal(smooth)
 
     output_results(results)
