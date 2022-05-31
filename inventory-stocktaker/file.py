@@ -3,7 +3,7 @@ import cv2 as cv
 
 # Global input file paths to set.
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/resources/"
-INPUT_IMAGE_PATH = 'side_hearts2.jpg'
+INPUT_IMAGE_PATH = 'side_elastic.jpg'
 
 # Global output file paths to set.
 OUTPUT_IMAGE_PATH = './resources/dark.png'

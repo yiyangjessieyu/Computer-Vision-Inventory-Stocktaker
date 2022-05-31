@@ -25,8 +25,6 @@ def count_houghNormal(img_original):
 
         # Create a new copy of the original image for drawing on later.
         img = img_original.copy()
-        # Create a dark image for drawing line detections on and later line refine.
-        hough_dark = np.zeros(img_original.shape).astype("uint8")
         # Use the Canny Edge Detector to find some edges.
         edges = cv2.Canny(gray, cannyThreshold1, cannyThreshold2)
         # Attempt to detect straight lines in the edge detected image.
@@ -49,9 +47,10 @@ def count_houghNormal(img_original):
                         y1 = int(y0 + 1000 * (a))
                         x2 = int(x0 - 1000 * (-b))
                         y2 = int(y0 - 1000 * (a))
-                        cv2.line(hough_dark, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                        cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                        cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
                         count += 1
+
+        cv2.imshow('Hough Line Counter', img)
 
         if cv2.waitKey(1000) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
