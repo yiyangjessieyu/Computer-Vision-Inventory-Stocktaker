@@ -1,15 +1,11 @@
 # Imports needed for this program to run.
 import cv2
 import numpy as np
-from file import *
 
 
 def extract_contours(image):
     # Create a dark image for drawing line detections on and later line refine.
-    print("000000000000000000")
-    print(image.shape)
     contour_dark = np.zeros(image.shape).astype("uint8")
-    cv2.imshow("DEBUG", contour_dark)
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     thresh = cv2.threshold(gray, 120, 255, cv2.THRESH_BINARY_INV)[1]
