@@ -3,10 +3,10 @@ import cv2 as cv
 
 # Global input file paths to set.
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/resources/"
-INPUT_IMAGE_PATH = 'side_elastic.jpg'
+INPUT_IMAGE_PATH = 'side_hearts_9.jpg'
 
 # Global output file paths to set.
-OUTPUT_IMAGE_PATH = './resources/dark.png'
+OUTPUT_IMAGE_PATH = 'dark.png'
 OUTPUT_FILE_PATH = 'src/output.txt'
 
 # Global window size to set
@@ -28,7 +28,7 @@ def read_image(image_to_read):
         print ('Error opening image: ' + image_to_read)
         return -1
 
-    # Scale the image down to 70% to fit on the monitor better.
+    # Scale the image down to fit on the monitor better.
     src = cv.resize(src, (int(src.shape[1] * WINDOW_RATIO), int(src.shape[0] * WINDOW_RATIO)))
 
     return src

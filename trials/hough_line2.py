@@ -8,8 +8,8 @@ import cv2 as cv
 import numpy as np
 
 # Global input file paths to set.
-LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
+LOCAL_PATH = "/Project-april21/Computer-Vision-Inventory-Stocktaker/"
+INPUT_IMAGE_PATH = 'resources/side_hearts_9.jpg'
 
 def read_image(image_to_read):
     # Check number of arguments

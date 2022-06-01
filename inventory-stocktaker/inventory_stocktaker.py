@@ -1,7 +1,6 @@
 # inventory_stocktaker.py
 # contours of stright lines and ignoring curves
 # find hough lines
-# potentially refine
 # make thicker
 # count hough lines
 
@@ -18,15 +17,11 @@ from dilate import *
 
 
 
-
-
 def main():
     results = {}
 
     # [load_image]
     global SOURCE_IMAGE
-    print(000000000000000)
-    print(LOCAL_PATH + INPUT_IMAGE_PATH)
     SOURCE_IMAGE = read_image(LOCAL_PATH + INPUT_IMAGE_PATH)
 
     # [contours]
@@ -40,6 +35,10 @@ def main():
     dilate = dilation(hough_dark)
     show_wait_destroy("dilate", dilate)
 
+    # Save the dark drawing of lines onto desktop.
+    cv.imwrite(LOCAL_PATH + "dilate.png", dilate)
+
+    # [count]
     print(count_houghNormal(dilate))
 
 

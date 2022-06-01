@@ -7,8 +7,8 @@ import numpy as np
 import sys
 import cv2 as cv
 
-LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/"
-INPUT_IMAGE_PATH = 'resources/side_hearts.jpg'
+LOCAL_PATH = "/Project-april21/Computer-Vision-Inventory-Stocktaker/"
+INPUT_IMAGE_PATH = 'resources/side_hearts_9.jpg'
 
 def nothing(x):
     # We need a callback for the createTrackbar function.
