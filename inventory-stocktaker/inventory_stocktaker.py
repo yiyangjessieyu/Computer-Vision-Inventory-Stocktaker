@@ -5,6 +5,7 @@
 # count hough lines
 
 # Imports needed for this program to run.
+import re
 import cv2 as cv
 import numpy
 from window import *
@@ -13,12 +14,19 @@ from hough_line import *
 from contours import *
 from dilate import *
 
+
 # from counter import *
 
+def get_correct_count(input_image_path):
+    count = ''
+    for char in input_image_path:
+        if char.isdigit():
+            count += char
+    return int(count)
 
 
 def main():
-    results = {}
+    data = {}
 
     # [load_image]
     global SOURCE_IMAGE
@@ -39,7 +47,11 @@ def main():
     cv.imwrite(LOCAL_PATH + "dilate.png", dilate)
 
     # [count]
-    print(count_houghNormal(dilate))
+    correct_count = get_correct_count(INPUT_IMAGE_PATH)
+    result_count = count_houghNormal(dilate)
+    data[INPUT_IMAGE_PATH] = (correct_count, result_count)
+    output_results(data)
+
 
 
 if __name__ == "__main__":

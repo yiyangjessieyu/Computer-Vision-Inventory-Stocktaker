@@ -7,7 +7,7 @@ INPUT_IMAGE_PATH = 'side_hearts_9.jpg'
 
 # Global output file paths to set.
 OUTPUT_IMAGE_PATH = 'dark.png'
-OUTPUT_FILE_PATH = 'src/output.txt'
+OUTPUT_FILE_PATH = 'output.txt'
 
 # Global window size to set
 WINDOW_RATIO = 0.4
@@ -40,7 +40,12 @@ def output_results(results):
 
     # Writing a string to file
     for key, value in results.items():
-        output.write(str(key) + ' ' + str(value) + '\n')
+        correct_count, result_count = value
+        accuracy = float(correct_count)/float(result_count)
+        output.write("For the image: " + str(key) + '\n'
+                     "Correct count is: " + str(correct_count) + '\n'
+                     "Result count is: " + str(result_count) + '\n'
+                     "Accuracy of: " + str(accuracy))
 
     # Closing file
     output.close()
