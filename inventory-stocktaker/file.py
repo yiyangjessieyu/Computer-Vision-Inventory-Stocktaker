@@ -3,7 +3,7 @@ import cv2 as cv
 
 # Global input file paths to set.
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/resources/"
-INPUT_IMAGE_PATH = 'side_hearts_9.jpg'
+INPUT_IMAGE_PATH = 'side_elastic_10.png'
 
 # Global output file paths to set.
 OUTPUT_IMAGE_PATH = 'dark.png'
@@ -36,7 +36,7 @@ def read_image(image_to_read):
 
 def output_results(results):
     # Opening a file
-    output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'w')
+    output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'a')
 
     # Writing a string to file
     for key, value in results.items():
@@ -45,7 +45,8 @@ def output_results(results):
         output.write("For the image: " + str(key) + '\n'
                      "Correct count is: " + str(correct_count) + '\n'
                      "Result count is: " + str(result_count) + '\n'
-                     "Accuracy of: " + str(accuracy))
+                     "Accuracy of: " + str(accuracy) + '\n'
+                     "-----------------------------------------------" + '\n')
 
     # Closing file
     output.close()
