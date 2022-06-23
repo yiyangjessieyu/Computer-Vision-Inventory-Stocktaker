@@ -18,7 +18,8 @@ redundant task that can be reduced. This file contains information that may be h
 1. inventory_stocktaker.py: where the main code is contained.
 2. file.py: where code for input/output processing is contained. Modify the local, input, or output global variables to your needs.
 3. window.py: where code for displaying the process is contained. Modify to suit your window size needs.
-4. Presensation.pdf: elevator pitch for the Inventory Stocktaker.
+4. test-data file: contains a few test data that can be used for this application.
+5. Presensation.pdf: elevator pitch for the Inventory Stocktaker.
 
 ## For data analysis of result accuracy
 - If you want to get an accuracy check:
@@ -27,8 +28,8 @@ redundant task that can be reduced. This file contains information that may be h
 3. where {count} is the correct count of inventory in this image.
 - If not, make sure the lines under # [data] in inventory.py is commented out.
 
-## To run program
-1. Get test data by taking photo images with your phone.
+## Running instructions
+1. Get test data by taking photo images with your phone, or use one from the test-data file.
 2. Make sure you have required setup.
 3. Prepare your input image for accuracy analysis (or not).
 4. Modify file.py, or window.py to suit your needs.
