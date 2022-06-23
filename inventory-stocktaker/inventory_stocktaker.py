@@ -47,8 +47,12 @@ def main():
     cv.imwrite(LOCAL_PATH + "dilate.png", dilate)
 
     # [count]
-    correct_count = get_correct_count(INPUT_IMAGE_PATH)
     result_count = count_houghNormal(dilate)
+    print("Inventory count of: " + str(result_count))
+
+    # [data]
+    # Comment out if you don't want to see accuracy of results.
+    correct_count = get_correct_count(INPUT_IMAGE_PATH)
     data[INPUT_IMAGE_PATH] = (correct_count, result_count)
     output_results(data)
 
