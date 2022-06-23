@@ -1,7 +1,7 @@
 # Inventory Stocker
-### Author: Yiyang (Jessie) Yu
+### Author: Yiyang (Jessie) Yu, 2022
 An application that can detect and count the number of common objects in a frame to aid in a store's stock-taking process. A tool like this can aid a store’s stock-taking process, as counting inventory can be a
-redundant task that can be reduced.
+redundant task that can be reduced. This file contains information that may be helpful to people who wish to extend this in future work.
 
 ## Application's Purpose
 - Need a repetitive object detector for inventory on the shelf.
