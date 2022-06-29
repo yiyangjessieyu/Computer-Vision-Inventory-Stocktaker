@@ -1,0 +1,5 @@
+For the image: side_pen_14.jpg
+Correct count is: 14
+Result count is: 5
+Accuracy of: 2.8
+-----------------------------------------------
