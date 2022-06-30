@@ -41,5 +41,5 @@ redundant task that can be reduced. This file contains information that may be h
 2. The contours in the image will be found and draw on a new dark background. Code to refer to in contour.py.
 3. Filter out only the straight vertical lines from the contours on a dark background. Code to refer to in hough_line.py.
 4. Dilate the vertical lines, therefore making them more pronounced and thicker. This also gets rid of multiple detections by merging close proximately lines together to be one.
-5. Use hough line algorithm to count the vertical lines. Code to refer to in dilate.py.
-6. Return count as stocktaking result. Code to refer to in hough_line.py.
+5. Use hough line algorithm to count the vertical lines. Code to refer to in hough_line.py.
+6. Return count as stocktaking result.
