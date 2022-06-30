@@ -33,7 +33,9 @@ def main():
     SOURCE_IMAGE = read_image(LOCAL_PATH + INPUT_IMAGE_PATH)
 
     # [contours]
-    thresh, contour, contour_dark = extract_contours(SOURCE_IMAGE)
+    thresh, contour, contour_dark, contour_dark2 = extract_contours(SOURCE_IMAGE)
+    show_wait_destroy("contour_dark", contour_dark)
+    show_wait_destroy("contour_dark", contour_dark2)
 
     # [hough lines]
     hough, hough_dark = houghNormal(contour_dark)
