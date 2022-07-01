@@ -60,7 +60,8 @@ def count_houghNormal(img_original):
 
 
 def houghNormal(img_original):
-    gray = cv2.cvtColor(img_original, cv2.COLOR_BGR2GRAY)
+    #gray = cv2.cvtColor(img_original, cv2.COLOR_BGR2GRAY)
+    gray = img_original
 
     cv2.namedWindow('Hough Line Transform')
     cv2.createTrackbar('CannyThreshold1', 'Hough Line Transform', 0, 1200, nothing)

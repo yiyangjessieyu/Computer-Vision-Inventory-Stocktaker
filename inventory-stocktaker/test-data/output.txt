@@ -3,3 +3,8 @@ Correct count is: 14
 Result count is: 5
 Accuracy of: 2.8
 -----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 3
+Accuracy of: 8.0
+-----------------------------------------------

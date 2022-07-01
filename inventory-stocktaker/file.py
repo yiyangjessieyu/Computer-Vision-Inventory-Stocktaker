@@ -10,7 +10,11 @@ OUTPUT_IMAGE_PATH = 'dark.png'
 OUTPUT_FILE_PATH = 'output.txt'
 
 # Global window size to set
-WINDOW_RATIO = 0.4
+WINDOW_RATIO = 0.2
+
+
+def save_image(image_to_save):
+    cv.imwrite('saved_image.jpg', image_to_save)
 
 
 def read_image(image_to_read):
