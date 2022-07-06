@@ -33,14 +33,11 @@ def main():
     SOURCE_IMAGE = read_image(LOCAL_PATH + INPUT_IMAGE_PATH)
 
     # [contours]
-    thresh, contour, contour_dark, contour_dark2, otsuThreshInv = extract_contours(SOURCE_IMAGE)
+    contour_dark = extract_contours(SOURCE_IMAGE)
     show_wait_destroy("contour_dark", contour_dark)
-    show_wait_destroy("otsuThreshInv", otsuThreshInv)
-
-    adaptive_thresh = read_image(LOCAL_PATH + 'saved_image.jpg')
 
     # [hough lines]
-    hough, hough_dark = houghNormal(contour_dark2)
+    hough, hough_dark = houghNormal(contour_dark)
     show_wait_destroy("hough_dark", hough_dark)
 
     # [dilate]
@@ -48,10 +45,10 @@ def main():
     show_wait_destroy("dilate", dilate)
 
     # Save the dark drawing of lines onto desktop.
-    cv.imwrite(LOCAL_PATH + "dilate.png", dilate)
+    cv.imwrite(LOCAL_PATH + "dilate.png", hough_dark)
 
     # [count]
-    result_count = count_houghNormal(dilate)
+    result_count = count_houghNormal(hough_dark)
     print("Inventory count of: " + str(result_count))
 
     # [data]
