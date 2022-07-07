@@ -58,3 +58,38 @@ Correct count is: 24
 Result count is: 21
 Accuracy of: 1.1428571428571428
 -----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 7
+Accuracy of: 3.4285714285714284
+-----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 23
+Accuracy of: 1.0434782608695652
+-----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 7
+Accuracy of: 3.4285714285714284
+-----------------------------------------------
+For the image: side_tape_12.jpg
+Correct count is: 12
+Result count is: 4
+Accuracy of: 3.0
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+Correct count is: 9
+Result count is: 9
+Accuracy of: 1.0
+-----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 5
+Accuracy of: 4.8
+-----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 7
+Accuracy of: 3.4285714285714284
+-----------------------------------------------

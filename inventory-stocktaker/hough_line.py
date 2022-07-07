@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 
 HOUGH_THRESHOLD = 125
+VERTICAL_RANGE = 3
+COUNT_RANGE = 3
 
 def nothing(x):
     # We need a callback for the createTrackbar function.
@@ -36,9 +38,9 @@ def count_houghNormal(img_original):
         if lines is not None:
             for line in lines:
                 for rho, theta in line:
-                    if (np.radians(0) <= theta <= np.radians(1)) or \
-                        (np.radians(359) <= theta <= np.radians(360)) or \
-                        (theta >= np.radians(179) and theta <= np.radians(181)):
+                    if (np.radians(0) <= theta <= np.radians(COUNT_RANGE)) or \
+                        (np.radians(360 - COUNT_RANGE) <= theta <= np.radians(360)) or \
+                        (theta >= np.radians(180 - COUNT_RANGE) and theta <= np.radians(180 + COUNT_RANGE)):
                         a = np.cos(theta)
                         b = np.sin(theta)
                         x0 = a * rho
@@ -86,9 +88,9 @@ def houghNormal(img_original):
         if lines is not None:
             for line in lines:
                 for rho, theta in line:
-                    if (np.radians(0) <= theta <= np.radians(4)) or \
-                        (np.radians(356) <= theta <= np.radians(360)) or \
-                        (theta >= np.radians(176) and theta <= np.radians(184)):
+                    if (np.radians(0) <= theta <= np.radians(VERTICAL_RANGE)) or \
+                        (np.radians(360 - VERTICAL_RANGE) <= theta <= np.radians(360)) or \
+                        (theta >= np.radians(180 - VERTICAL_RANGE) and theta <= np.radians(180 + VERTICAL_RANGE)):
                         a = np.cos(theta)
                         b = np.sin(theta)
                         x0 = a * rho
@@ -106,6 +108,52 @@ def houghNormal(img_original):
         cv2.imshow('Hough Line Transform', combined)
 
         if cv2.waitKey(1000) & 0xFF == ord('q'):
+            cv2.destroyAllWindows()
+            break
+
+    return img, hough_dark
+
+
+def houghP(img_original):
+    #blur = cv2.GaussianBlur(img_original, (9,9), 0)
+    #gray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
+    gray = img_original
+
+    cv2.namedWindow('Hough Line Transform')
+    cv2.createTrackbar('Canny Threshold 1', 'Hough Line Transform', 0, 1200, nothing)
+    cv2.createTrackbar('Canny Threshold 2', 'Hough Line Transform', 0, 1200, nothing)
+    cv2.createTrackbar("Min Line Length", 'Hough Line Transform', 0, 100, nothing)
+    cv2.createTrackbar("Max Line Gap", 'Hough Line Transform', 0, 100, nothing)
+
+    while True:
+        minLineLength = cv2.getTrackbarPos('Min Line Length', 'Hough Line Transform')
+        maxLineGap = cv2.getTrackbarPos('Max Line Gap', 'Hough Line Transform')
+        cannyThreshold1 = cv2.getTrackbarPos('Canny Threshold 1', 'Hough Line Transform')
+        cannyThreshold2 = cv2.getTrackbarPos('Canny Threshold 2', 'Hough Line Transform')
+
+        # Create a new copy of the original image for drawing on later.
+        img = img_original.copy()
+        # Create a dark image for drawing line detections on and later line refine.
+        hough_dark = np.zeros(img_original.shape).astype("uint8")
+        # Use the Canny Edge Detector to find some edges.
+        edges = cv2.Canny(gray, cannyThreshold1, cannyThreshold2)
+        # Attempt to detect straight lines in the edge detected image.
+        lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, minLineLength=minLineLength, maxLineGap=maxLineGap)
+
+        # For each line that was detected, draw it on the img.
+        if lines is not None:
+            for line in lines:
+                for x1,y1,x2,y2 in line:
+                    cv2.line(hough_dark,(x1,y1),(x2,y2),(0,255,0),2)
+                    cv2.line(img,(x1,y1),(x2,y2),(0, 0, 255),2)
+
+
+        # Create a combined image of Hough Line Transform result and the Canny Line Detector result.
+        combined = np.concatenate((img, cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)), axis=1)
+
+        cv2.imshow('Hough Line Transform', combined)
+
+        if cv2.waitKey(100) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
 

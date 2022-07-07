@@ -4,7 +4,7 @@ import numpy as np
 import numpy as np
 import matplotlib.pyplot as plt
 
-def extract_contours(image):
+def extract_contours(image, contour_method):
     # Create a dark image for drawing line detections on and later line refine.
     contour_dark = np.zeros(image.shape).astype("uint8")
 
@@ -24,12 +24,15 @@ def extract_contours(image):
     # instead of manually specifying the threshold value, we can use
     # adaptive thresholding to examine neighborhoods of pixels and
     # adaptively threshold each neighborhood
-    (T, threshInv) = cv2.threshold(blurred, 0, 125,
-                              cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
 
-    #threshInv = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THqRESH_BINARY_INV, 21, 10)
+    if contour_method == "OTSU":
+        (T, threshInv) = cv2.threshold(blurred, 0, 125, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+        cv2.imshow("OTSU Thresholding", threshInv)
 
-    cv2.imshow("Mean Adaptive Thresholding", threshInv)
+    elif contour_method == "ADAPT":
+        threshInv = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 21, 10)
+        cv2.imshow("Mean Adaptive Thresholding", threshInv)
+
     cv2.waitKey(0)
 
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
