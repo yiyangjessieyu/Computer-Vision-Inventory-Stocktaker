@@ -3,7 +3,7 @@ import cv2 as cv
 
 # Global input file paths to set.
 LOCAL_PATH = "/csse/users/yyu69/Desktop/COSC428/Project-april21/Computer-Vision-Inventory-Stocktaker/inventory-stocktaker/test-data/"
-INPUT_IMAGE_PATH = 'button_battery_24.jpg'
+INPUT_IMAGE_PATH = 'side_elastic_10.png'
 
 # Global output file paths to set.
 OUTPUT_IMAGE_PATH = 'dark.png'
@@ -38,15 +38,22 @@ def read_image(image_to_read):
     return src
 
 
-def output_results(results):
+def output_results(results, contour_method, hough_method):
     # Opening a file
     output = open(LOCAL_PATH + OUTPUT_FILE_PATH, 'a')
 
     # Writing a string to file
     for key, value in results.items():
         correct_count, result_count = value
-        accuracy = float(correct_count)/float(result_count)
+
+        if correct_count == 0 or result_count == 0:
+            accuracy = 0
+        else:
+            accuracy = float(correct_count)/float(result_count)
+
         output.write("For the image: " + str(key) + '\n'
+                     "With contour method: " + str(contour_method) + '\n'
+                     "With hough method: " + str(hough_method) + '\n'
                      "Correct count is: " + str(correct_count) + '\n'
                      "Result count is: " + str(result_count) + '\n'
                      "Accuracy of: " + str(accuracy) + '\n'

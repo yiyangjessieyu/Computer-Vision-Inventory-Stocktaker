@@ -5,7 +5,7 @@ import numpy as np
 
 HOUGH_THRESHOLD = 125
 VERTICAL_RANGE = 3
-COUNT_RANGE = 3
+COUNT_RANGE = 1
 
 def nothing(x):
     # We need a callback for the createTrackbar function.
@@ -49,7 +49,7 @@ def count_houghNormal(img_original):
                         y1 = int(y0 + 1000 * (a))
                         x2 = int(x0 - 1000 * (-b))
                         y2 = int(y0 - 1000 * (a))
-                        cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                        cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
                         count += 1
 
         cv2.imshow('Hough Line Counter', img)
@@ -122,8 +122,8 @@ def houghP(img_original):
     cv2.namedWindow('Hough Line Transform')
     cv2.createTrackbar('Canny Threshold 1', 'Hough Line Transform', 0, 1200, nothing)
     cv2.createTrackbar('Canny Threshold 2', 'Hough Line Transform', 0, 1200, nothing)
-    cv2.createTrackbar("Min Line Length", 'Hough Line Transform', 0, 100, nothing)
-    cv2.createTrackbar("Max Line Gap", 'Hough Line Transform', 0, 100, nothing)
+    cv2.createTrackbar("Min Line Length", 'Hough Line Transform', 100, 100, nothing)
+    cv2.createTrackbar("Max Line Gap", 'Hough Line Transform', 600, 600, nothing)
 
     while True:
         minLineLength = cv2.getTrackbarPos('Min Line Length', 'Hough Line Transform')
@@ -138,7 +138,7 @@ def houghP(img_original):
         # Use the Canny Edge Detector to find some edges.
         edges = cv2.Canny(gray, cannyThreshold1, cannyThreshold2)
         # Attempt to detect straight lines in the edge detected image.
-        lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, minLineLength=minLineLength, maxLineGap=maxLineGap)
+        lines = cv2.HoughLinesP(edges, 1, 5*np.pi/180, 100, minLineLength=minLineLength, maxLineGap=maxLineGap)
 
         # For each line that was detected, draw it on the img.
         if lines is not None:

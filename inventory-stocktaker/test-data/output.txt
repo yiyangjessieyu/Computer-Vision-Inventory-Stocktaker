@@ -93,3 +93,599 @@ Correct count is: 24
 Result count is: 7
 Accuracy of: 3.4285714285714284
 -----------------------------------------------
+For the image: button_battery_24.jpg
+Correct count is: 24
+Result count is: 23
+Accuracy of: 1.0434782608695652
+-----------------------------------------------
+For the image: most_45.jpg
+Correct count is: 45
+Result count is: 2
+Accuracy of: 22.5
+-----------------------------------------------
+For the image: most_45.jpg
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_45.jpg
+Correct count is: 45
+Result count is: 1
+Accuracy of: 45.0
+-----------------------------------------------
+For the image: most_45.jpg
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_45.jpg
+Correct count is: 45
+Result count is: 1
+Accuracy of: 45.0
+-----------------------------------------------
+For the image: side_battery_8.jpg
+Correct count is: 8
+Result count is: 2
+Accuracy of: 4.0
+-----------------------------------------------
+For the image: side_battery_8.jpg
+Correct count is: 8
+Result count is: 9
+Accuracy of: 0.8888888888888888
+-----------------------------------------------
+For the image: side_battery_B_8.png
+Correct count is: 8
+Result count is: 2
+Accuracy of: 4.0
+-----------------------------------------------
+For the image: side_battery_B_8.png
+Correct count is: 8
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_battery_B_8.png
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 8
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_battery_B_8.png
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 8
+Result count is: 5
+Accuracy of: 1.6
+-----------------------------------------------
+For the image: side_battery_B_8.png
+With contour method: OTSU
+With hough method: P
+Correct count is: 8
+Result count is: 2
+Accuracy of: 4.0
+-----------------------------------------------
+For the image: side_battery_B_8.png
+With contour method: ADAPT
+With hough method: P
+Correct count is: 8
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_battery_B_8.png
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 8
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_battery_B_8.png
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 8
+Result count is: 3
+Accuracy of: 2.6666666666666665
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: P
+Correct count is: 10
+Result count is: 2
+Accuracy of: 5.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: ADAPT
+With hough method: P
+Correct count is: 10
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 1
+Accuracy of: 10.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 7
+Accuracy of: 1.4285714285714286
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: P
+Correct count is: 10
+Result count is: 2
+Accuracy of: 5.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: ADAPT
+With hough method: P
+Correct count is: 10
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 14
+Accuracy of: 0.7142857142857143
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 9
+Result count is: 2
+Accuracy of: 4.5
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 9
+Result count is: 2
+Accuracy of: 4.5
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 9
+Result count is: 2
+Accuracy of: 4.5
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 9
+Result count is: 11
+Accuracy of: 0.8181818181818182
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 9
+Result count is: 4
+Accuracy of: 2.25
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 9
+Result count is: 2
+Accuracy of: 4.5
+-----------------------------------------------
+For the image: side_hearts_9.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 9
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 14
+Result count is: 2
+Accuracy of: 7.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 14
+Result count is: 2
+Accuracy of: 7.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 14
+Result count is: 2
+Accuracy of: 7.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: NORMAL
+With hough method: NORMAL
+Correct count is: 14
+Result count is: 4
+Accuracy of: 3.5
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 14
+Result count is: 1
+Accuracy of: 14.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 14
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: NORMAL
+With hough method: NORMAL
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: most_A_45.jpg
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 45
+Result count is: 0
+Accuracy of: 0
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 23
+Accuracy of: 0.4782608695652174
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 28
+Accuracy of: 0.39285714285714285
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 22
+Accuracy of: 0.5
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 22
+Accuracy of: 0.5
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 22
+Accuracy of: 0.5
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 11
+Result count is: 15
+Accuracy of: 0.7333333333333333
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 19
+Accuracy of: 0.5789473684210527
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 19
+Accuracy of: 0.5789473684210527
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 18
+Accuracy of: 0.6111111111111112
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 9.0
+Accuracy of: 1.2222222222222223
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 9.0
+Accuracy of: 1.2222222222222223
+-----------------------------------------------
+For the image: clip_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 11.0
+Accuracy of: 1.0
+-----------------------------------------------
+For the image: pen_13.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 13
+Result count is: 18.5
+Accuracy of: 0.7027027027027027
+-----------------------------------------------
+For the image: wire_11.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 11
+Result count is: 1.0
+Accuracy of: 11.0
+-----------------------------------------------
+For the image: wire_11.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 11
+Result count is: 1.5
+Accuracy of: 7.333333333333333
+-----------------------------------------------
+For the image: wire_11.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 11
+Result count is: 4.0
+Accuracy of: 2.75
+-----------------------------------------------
+For the image: wire_11.jpg
+With contour method: NORMAL
+With hough method: NORMAL
+Correct count is: 11
+Result count is: 6.0
+Accuracy of: 1.8333333333333333
+-----------------------------------------------
+For the image: button_battery_24.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 24
+Result count is: 2.0
+Accuracy of: 12.0
+-----------------------------------------------
+For the image: button_battery_24.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 24
+Result count is: 8.5
+Accuracy of: 2.823529411764706
+-----------------------------------------------
+For the image: button_battery_24.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 24
+Result count is: 2.0
+Accuracy of: 12.0
+-----------------------------------------------
+For the image: button_battery_24.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 24
+Result count is: 0.0
+Accuracy of: 0
+-----------------------------------------------
+For the image: button_battery_24.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 24
+Result count is: 8.5
+Accuracy of: 2.823529411764706
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: NORMAL
+With hough method: P
+Correct count is: 14
+Result count is: 1.0
+Accuracy of: 14.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: OTSU
+With hough method: P
+Correct count is: 14
+Result count is: 1.0
+Accuracy of: 14.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: ADAPT
+With hough method: P
+Correct count is: 14
+Result count is: 1.0
+Accuracy of: 14.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: NORMAL
+With hough method: NORMAL
+Correct count is: 14
+Result count is: 0.0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 14
+Result count is: 1.0
+Accuracy of: 14.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 14
+Result count is: 1.0
+Accuracy of: 14.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: NORMAL
+With hough method: P
+Correct count is: 10
+Result count is: 1.0
+Accuracy of: 10.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: P
+Correct count is: 10
+Result count is: 0.0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: ADAPT
+With hough method: P
+Correct count is: 10
+Result count is: 0.0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: NORMAL
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 7.5
+Accuracy of: 1.3333333333333333
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: NORMAL
+With hough method: P
+Correct count is: 10
+Result count is: 1.0
+Accuracy of: 10.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: P
+Correct count is: 10
+Result count is: 0.0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: ADAPT
+With hough method: P
+Correct count is: 10
+Result count is: 0.0
+Accuracy of: 0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: NORMAL
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 0.5
+Accuracy of: 20.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: OTSU
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 3.0
+Accuracy of: 3.3333333333333335
+-----------------------------------------------
+For the image: side_elastic_10.png
+With contour method: ADAPT
+With hough method: NORMAL
+Correct count is: 10
+Result count is: 3.0
+Accuracy of: 3.3333333333333335
+-----------------------------------------------

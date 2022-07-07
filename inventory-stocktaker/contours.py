@@ -25,13 +25,17 @@ def extract_contours(image, contour_method):
     # adaptive thresholding to examine neighborhoods of pixels and
     # adaptively threshold each neighborhood
 
-    if contour_method == "OTSU":
+    if contour_method == "NORMAL":
+        threshInv = cv2.threshold(gray, 120, 255, cv2.THRESH_BINARY_INV)[1]
+        cv2.imshow("NORMAL threshInv", threshInv)
+
+    elif contour_method == "OTSU":
         (T, threshInv) = cv2.threshold(blurred, 0, 125, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-        cv2.imshow("OTSU Thresholding", threshInv)
+        cv2.imshow("OTSU threshInv", threshInv)
 
     elif contour_method == "ADAPT":
         threshInv = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 21, 10)
-        cv2.imshow("Mean Adaptive Thresholding", threshInv)
+        cv2.imshow("Mean Adaptive threshInv", threshInv)
 
     cv2.waitKey(0)
 
@@ -47,24 +51,24 @@ def extract_contours(image, contour_method):
 
     # visualize only the masked regions in the image
     masked = cv2.bitwise_and(image, image, mask=threshInv)
-    cv2.imshow("masked", masked)
+    cv2.imshow("masked threshInv", masked)
     cv2.waitKey(0)
 
 
-    (cnt, hierarchy) = cv2.findContours(
-        threshInv.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    cv2.drawContours(rgb, cnt, -1, (0, 255, 0), 2)
+    # (cnt, hierarchy) = cv2.findContours(
+    #     threshInv.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    # rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    # cv2.drawContours(rgb, cnt, -1, (0, 255, 0), 2)
+    #
+    # plt.imshow(rgb)
 
-    plt.imshow(rgb)
-    print("product count in the image from contours : ", len(cnt))
+    cnts = cv2.findContours(threshInv, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+    print("product count in the image from contours : ", len(cnts))
 
-    cnts2 = cv2.findContours(threshInv, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cnts2 = cnts2[0] if len(cnts2) == 2 else cnts2[1]
-
-    for c in cnts2:
-        cv2.drawContours(image, [c], -1, (36, 255, 12), 3)
-        cv2.drawContours(contour_dark, [c], -1, (36, 255, 12), 3)
+    for c in cnts:
+        cv2.drawContours(image, [c], -1, (36, 255, 12), 2)
+        cv2.drawContours(contour_dark, [c], -1, (36, 255, 12), 2)
 
     cv2.imshow("image", image)
     cv2.waitKey(0)
