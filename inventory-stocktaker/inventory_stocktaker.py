@@ -14,7 +14,7 @@ from hough_line import *
 from contours import *
 from dilate import *
 
-CONTOUR_METHODS = ["NORMAL", "OTSU", "ADAPT"]
+CONTOUR_METHODS = ["NORMAL", "OTSU", "ADAPT", "ALL"]
 HOUGH_METHODS = ["P", "NORMAL"]
 
 
@@ -72,6 +72,8 @@ def main():
     # [load_image]
     global SOURCE_IMAGE
     SOURCE_IMAGE = read_image(LOCAL_PATH + INPUT_IMAGE_PATH)
+
+    result_count = process(CONTOUR_METHODS[3], HOUGH_METHODS[0])
 
     c_i = 0
     h_i = 0

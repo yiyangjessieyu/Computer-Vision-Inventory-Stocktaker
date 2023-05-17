@@ -30,12 +30,32 @@ def extract_contours(image, contour_method):
         cv2.imshow("NORMAL threshInv", threshInv)
 
     elif contour_method == "OTSU":
-        (T, threshInv) = cv2.threshold(blurred, 0, 125, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+        (T, threshInv) = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
         cv2.imshow("OTSU threshInv", threshInv)
 
     elif contour_method == "ADAPT":
         threshInv = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 21, 10)
         cv2.imshow("Mean Adaptive threshInv", threshInv)
+
+    elif contour_method == "ALL":
+        basic = cv2.threshold(gray, 120, 255, cv2.THRESH_BINARY_INV)[1]
+        cv2.imshow("Basic", basic)
+
+        (T, otsu) = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+        cv2.imshow("Otsu", otsu)
+
+        adaptive = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 21, 10)
+        cv2.imshow("Mean Adaptive", adaptive)
+
+        # visualize only the masked regions in the image
+        m_basic = cv2.bitwise_and(image, image, mask=basic)
+        cv2.imshow("masked m_basic", m_basic)
+
+        m_otsu = cv2.bitwise_and(image, image, mask=otsu)
+        cv2.imshow("masked m_otsu", m_otsu)
+
+        m_adaptive = cv2.bitwise_and(image, image, mask=adaptive)
+        cv2.imshow("masked m_adaptive", m_adaptive)
 
     cv2.waitKey(0)
 
@@ -50,9 +70,22 @@ def extract_contours(image, contour_method):
     # cv2.waitKey(0)
 
     # visualize only the masked regions in the image
-    masked = cv2.bitwise_and(image, image, mask=threshInv)
-    cv2.imshow("masked threshInv", masked)
-    cv2.waitKey(0)
+
+    if contour_method != "ALL":
+        masked = cv2.bitwise_and(image, image, mask=threshInv)
+        cv2.imshow("masked threshInv", masked)
+        cv2.waitKey(0)
+
+        cnts = cv2.findContours(threshInv, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+        print("product count in the image from contours : ", len(cnts))
+
+        for c in cnts:
+            cv2.drawContours(image, [c], -1, (36, 255, 12), 2)
+            cv2.drawContours(contour_dark, [c], -1, (36, 255, 12), 2)
+
+        cv2.imshow("image", image)
+        cv2.waitKey(0)
 
 
     # (cnt, hierarchy) = cv2.findContours(
@@ -62,15 +95,22 @@ def extract_contours(image, contour_method):
     #
     # plt.imshow(rgb)
 
-    cnts = cv2.findContours(threshInv, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    print("product count in the image from contours : ", len(cnts))
+    thresholds = [basic, otsu, adaptive]
+    contours = []
 
-    for c in cnts:
-        cv2.drawContours(image, [c], -1, (36, 255, 12), 2)
-        cv2.drawContours(contour_dark, [c], -1, (36, 255, 12), 2)
+    for threshInv in thresholds:
+        cnts = cv2.findContours(threshInv, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+        print("product count in the image from contours : ", len(cnts))
 
-    cv2.imshow("image", image)
-    cv2.waitKey(0)
+        for c in cnts:
+            cv2.drawContours(image, [c], -1, (36, 255, 12), 2)
+            cv2.drawContours(contour_dark, [c], -1, (36, 255, 12), 2)
+
+        contours.append((image, contour_dark))
+
+    cv2.imshow("image", contours[0])
+    cv2.imshow("image", contours[1])
+    cv2.imshow("image", contours[2])
 
     return contour_dark
