@@ -1,0 +1,58 @@
+For the image: side_battery_8.png
+Correct count is: 8
+Result count is: 7
+Accuracy of: 1.1428571428571428
+-----------------------------------------------For the image: side_battery_8.png
+Correct count is: 8
+Result count is: 7
+Accuracy of: 1.1428571428571428
+-----------------------------------------------For the image: side_battery_B_8.png
+Correct count is: 8
+Result count is: 3
+Accuracy of: 2.6666666666666665
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 13
+Accuracy of: 0.7692307692307693
+-----------------------------------------------
+For the image: side_tape_12.jpg
+Correct count is: 12
+Result count is: 2
+Accuracy of: 6.0
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 10
+Accuracy of: 1.0
+-----------------------------------------------
+For the image: side_pen_14.jpg
+Correct count is: 14
+Result count is: 6
+Accuracy of: 2.3333333333333335
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 15
+Accuracy of: 0.6666666666666666
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 13
+Accuracy of: 0.7692307692307693
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 12
+Accuracy of: 0.8333333333333334
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 14
+Accuracy of: 0.7142857142857143
+-----------------------------------------------
+For the image: side_elastic_10.png
+Correct count is: 10
+Result count is: 9
+Accuracy of: 1.1111111111111112
+-----------------------------------------------
